@@ -65,14 +65,13 @@
             var marker = new google.maps.Marker({
                 position: e.latLng,
                 map: map,
-                draggable: true,
+                draggable: true
             });
-            //marker.setMap(map);
-            var infowindow = new google.maps.InfoWindow({
-                content: 'Latitude: ' + e.lat() +
-                '<br>Longitude: ' + e.lng()
+
+            //Click on marker to remove it in case of mis-clicks.
+            marker.addListener('click', function(f){
+                marker.setMap(null);
             });
-            infowindow.open(map,marker);
         });
       }
 
