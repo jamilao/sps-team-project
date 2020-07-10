@@ -58,6 +58,22 @@
           // Browser doesn't support Geolocation
           handleLocationError(false, infoWindow, map.getCenter());
         }
+
+        //Allow organizer to click on map to place a marker. 
+        //TO-DO: Instead of displaying separate markers, draw path connecting each mouse click.
+        map.addListener("click", function(e){
+            var marker = new google.maps.Marker({
+                position: e.latLng,
+                map: map,
+                draggable: true,
+            });
+            //marker.setMap(map);
+            var infowindow = new google.maps.InfoWindow({
+                content: 'Latitude: ' + e.lat() +
+                '<br>Longitude: ' + e.lng()
+            });
+            infowindow.open(map,marker);
+        });
       }
 
       function handleLocationError(browserHasGeolocation, infoWindow, pos) {
