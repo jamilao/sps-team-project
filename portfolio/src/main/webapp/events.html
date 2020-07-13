@@ -7,19 +7,53 @@
         <script src="script.js"></script>
     </head>
     <body>
+        <div id="header">
         <section id="nav_bar" class="container">
-            <h3>Main</h3>
-            <h3>Resources</h3>
-            <h3>Are you an organizer?</h3>
+            <h4>Main</h4>
+            <h4>Resources</h4>
+            <h4>Sign in</h4>
         </section>
-        <div>
-            <h1>Join a protest in:</h1>
+        </div>  
+        <div id="protest_menu">
+        <h2>Join a protest in:</h2>
+        <div class="dropdown">
+            <button class="dropbtn">Choose a city</button>
+            <div class="dropdown-content">
+            <a href='#'>All</a>
+            <a href="#">City 1</a>
+            <a href="#">City 2</a>
+            <a href="#">City 3</a>
+            </div>
         </div>
+        </div>
+        <div id="main">
         <div>
-            <h2>Upcoming events</h2>
-            <p>Map 1</p>
-            <p>Map 2</p>
-            <p>Map 3</p>
+        <h2>Upcoming events</h2>
+        <div class="dropdown">
+            <button class="dropbtn">Change view</button>
+            <div class="dropdown-content">
+            <a href='#'>List</a>
+            <a href="#">Grid</a>
+            </div>
+        </div>
+            <div id="maps">
+            <div id="column-1">
+                <h3>Map 1</h3>
+                <h4>Location: </h4>
+                <h4>Description: </h4>
+            </div>
+            <div id="column-2">
+                <h3>Map 2</h3>
+                <h4>Location: </h4>
+                <h4>Description: </h4>
+            </div>
+            <div id="column-3">
+                <h3>Map 3</h3>
+                <h4>Location: </h4>
+                <h4>Description: </h4>
+            </div>
+            </div>
+        </div>
         </div>
     </body>
 </html>
