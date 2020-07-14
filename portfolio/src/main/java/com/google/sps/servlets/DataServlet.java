@@ -14,19 +14,48 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.DatastoreService;
+import com.google.appengine.api.datastore.DatastoreServiceFactory;
+import com.google.appengine.api.datastore.Entity;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello world!</h1>");
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Entity eventEntity = new Entity("Event");
+
+    String organizer = "PLACEHOLDER"; //TO-DO: Grab this from whoever is logged in.
+    String eventName = request.getParameter("eventName");
+    String location = request.getParameter("location");
+    String description = request.getParameter("description");
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Date date = new Date();
+    try{
+        date = sdf.parse(request.getParameter("date"));
+    } 
+    catch (ParseException pe){
+        System.out.println(pe);
+        return;
+    }
+
+    eventEntity.setProperty("organizer", organizer);
+    eventEntity.setProperty("eventName", eventName);
+    eventEntity.setProperty("location", location);
+    eventEntity.setProperty("description", description);
+    eventEntity.setProperty("date", date);
+
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    datastore.put(eventEntity);
+    response.sendRedirect("/testForm.html");
   }
 }
