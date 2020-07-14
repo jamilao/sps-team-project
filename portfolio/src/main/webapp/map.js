@@ -1,4 +1,5 @@
 var position = {lat: 40.7, lng: -74};
+var pathList = new Array();
 
 //Gets a set of latitude, longitude.
 function grabPosition(userLat, userLng){
@@ -18,4 +19,15 @@ function giveLatitude(){
 function giveLongitude(){
     setLng = parseFloat(localStorage.getItem("userLng"));
     return setLng;
+}
+
+function storeCoords(lat, lng){
+    var position = {lat: lat, lng: lng}; 
+    pathList.push(position);
+    localStorage.setItem("pathList", JSON.stringify(pathList));
+}
+
+function givePath(){
+    var path = JSON.parse(localStorage.getItem("pathList"));
+    return path;
 }
