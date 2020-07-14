@@ -1,6 +1,6 @@
 package com.google.sps;
 
-public final class Date{
+public final class CustomDate{
     private final String month;
     private final int day;
     private final int year;
@@ -8,7 +8,7 @@ public final class Date{
     private final int hours;
     private final int minutes;
     
-    public Date(String month, int day, int year, int hours, int minutes ){
+    public CustomDate(String month, int day, int year, int hours, int minutes ){
         this.month = month;
         this.day = day;
         this.year = year;
