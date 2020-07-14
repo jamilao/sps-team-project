@@ -41,14 +41,8 @@
         });
 
     // Draws polyline from hard-coded coordinates. Base code from: https://developers.google.com/maps/documentation/javascript/shapes
-    // TO-DO: Implement from coordinates set by organizer.
-      var pathCoordinates = [
-        {lat: 40.68, lng: -74},
-        {lat: 40.72, lng: -74},
-        {lat: 40.73, lng: -73.99}
-      ];
       var path = new google.maps.Polyline({
-        path: pathCoordinates,
+        path: givePath(),
         geodesic: true,
         strokeColor: '#FF0000',
         strokeOpacity: 1.0,
