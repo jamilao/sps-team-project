@@ -17,19 +17,25 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
+import java.util.ArrayList;
+import java.text.DateFormat; 
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-
+    ArrayList<EventData> events = new ArrayList<>();
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Entity eventEntity = new Entity("Event");
@@ -57,5 +63,44 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(eventEntity);
     response.sendRedirect("/testForm.html");
+  }
+  //TODO add doGet method
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Query query = new Query("Event");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+        for (Entity entity : results.asIterable()){
+            String organizer = (String) entity.getProperty("organizer");
+            String eventName = (String) entity.getProperty("eventName");
+            String location = (String) entity.getProperty("location");
+            String description = (String) entity.getProperty("description");
+            Date date = (Date) entity.getProperty("date");
+            EventData event = new EventData(organizer,eventName,location,description,date);
+            events.add(event);
+        }
+        String json_events = convertToJson(events);
+        response.setContentType("application/json;");
+        response.getWriter().println(json_events);
+  }
+   private String convertToJson(ArrayList items){
+      Gson gson = new Gson();
+      String json = gson.toJson(items);
+      return json;
+  }
+  private class EventData {
+      String organizer;
+      String eventName;
+      String location;
+      String description;
+      String date;
+      public EventData(String organizer, String eventName, String location, String description, Date date){
+          this.organizer = organizer;
+          this.eventName = eventName;
+          this.location = location;
+          this.description = description;
+          DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+          this.date = dateFormat.format(date);
+      }
   }
 }
