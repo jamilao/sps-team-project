@@ -70,6 +70,7 @@
 
             //Click on marker to remove it in case of mis-clicks.
             marker.addListener('click', function(f){
+                removeCoord(marker.position.lat(), marker.position.lng());
                 marker.setMap(null);
             });
 

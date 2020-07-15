@@ -27,6 +27,17 @@ function storeCoords(lat, lng){
     localStorage.setItem("pathList", JSON.stringify(pathList));
 }
 
+function removeCoord(lat, lng){
+    var position = {lat: lat, lng: lng};
+    for (i = 0; i < pathList.length; i++) {
+        if ((position.lat == pathList[i].lat) && (position.lng == pathList[i].lng)){
+            console.log("true");
+            pathList.splice(i, 1);
+        }
+    }
+    localStorage.setItem("pathList", JSON.stringify(pathList));
+}
+
 function givePath(){
     var path = JSON.parse(localStorage.getItem("pathList"));
     return path;
