@@ -8,7 +8,7 @@ public final class Event{
     private final String description;
     private final Date date;
 
-    public Event(String organizer, String eventName, String location, String description, Date date){
+    public Event(String organizer, String eventName, String location, String description, Date date) {
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
@@ -16,16 +16,19 @@ public final class Event{
         this.date = date;
     }
 
-    public String getOrganizer(){
+    public String getOrganizer() {
        return organizer;
     }
-    public String getEventName(){
+    
+    public String getEventName() {
        return eventName;
     }
-    public String getLocation(){
+
+    public String getLocation() {
        return location;
     }
-    public String getDescription(){
+    
+    public String getDescription() {
        return description;
     }
 }
