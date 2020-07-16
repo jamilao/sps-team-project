@@ -30,3 +30,10 @@ async function fetchEvents(){
         });
     });
 }
+function fetchEvent(){
+    var url = new URL(window.search.location);
+    var params = url.searchParams;
+    params.set("key","")
+    const parameterKey = urlParams.get("key");
+    fetch('/event')
+}

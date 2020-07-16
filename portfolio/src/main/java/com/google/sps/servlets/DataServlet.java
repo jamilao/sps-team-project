@@ -64,7 +64,6 @@ public class DataServlet extends HttpServlet {
     datastore.put(eventEntity);
     response.sendRedirect("/testForm.html");
   }
-  //TODO add doGet method
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Event");
@@ -83,12 +82,12 @@ public class DataServlet extends HttpServlet {
         response.setContentType("application/json;");
         response.getWriter().println(json_events);
   }
-   private String convertToJson(ArrayList items){
+  public String convertToJson(ArrayList items){
       Gson gson = new Gson();
       String json = gson.toJson(items);
       return json;
   }
-  private class EventData {
+  public class EventData {
       String organizer;
       String eventName;
       String location;
