@@ -40,10 +40,10 @@ public class DataServlet extends HttpServlet {
     String description = request.getParameter("description");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
-    try {
+    try{
         date = sdf.parse(request.getParameter("date"));
     } 
-    catch (ParseException pe) {
+    catch (ParseException pe){
         System.out.println(pe);
         return;
     }
