@@ -27,6 +27,10 @@ public final class Event{
         return password;
     }
 
+    public boolean validatePassword(String input){
+        return (input.equals(this.password));
+    }
+
     public String getPassword(){
         return password;
     }
