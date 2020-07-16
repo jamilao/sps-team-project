@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <title>Events</title>
         <link rel="stylesheet" href="events.css">
-        <script src="script.js"></script>
+        <script src="events.js"></script>
     </head>
-    <body>
+    <body onload="fetchEvents()">
         <div id="header">
         <section id="nav_bar" class="container">
             <h4>Main</h4>
@@ -27,33 +27,32 @@
         </div>
         </div>
         <div id="main">
-        <div>
-        <h2>Upcoming events</h2>
-        <div class="dropdown">
-            <button class="dropbtn">Change view</button>
-            <div class="dropdown-content">
-            <a href='#'>List</a>
-            <a href="#">Grid</a>
+            <div id="upcoming">
+            <h2>Upcoming events</h2>
             </div>
-        </div>
-            <div id="maps">
-            <div id="column-1">
+            <div id="events" class="container">
+                
+            <div class="child">
                 <h3>Map 1</h3>
                 <h4>Location: </h4>
                 <h4>Description: </h4>
             </div>
-            <div id="column-2">
+            <div class="child">
                 <h3>Map 2</h3>
                 <h4>Location: </h4>
                 <h4>Description: </h4>
             </div>
-            <div id="column-3">
+            <div class="child">
                 <h3>Map 3</h3>
                 <h4>Location: </h4>
                 <h4>Description: </h4>
             </div>
+            <div class="child">
+                <h3>Map 4</h3>
+                <h4>Location: </h4>
+                <h4>Description: </h4>
             </div>
-        </div>
+            </div>
         </div>
     </body>
 </html>
