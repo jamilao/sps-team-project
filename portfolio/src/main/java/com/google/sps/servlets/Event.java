@@ -1,4 +1,5 @@
 package com.google.sps.servlets;
+import com.google.appengine.api.datastore.Key;
 import java.util.*;
 
 public final class Event{
@@ -8,10 +9,10 @@ public final class Event{
     private final String description;
     private final Date start;
     private final Date end;
-    private final String password;
-    private final String key;
+    private String password;
+    private final Key key;
 
-    public Event(String organizer, String eventName, String location, String description, Date start, Date end, String key){
+    public Event(String organizer, String eventName, String location, String description, Date start, Date end, Key key){
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
@@ -37,6 +38,12 @@ public final class Event{
 
     public String getPassword(){
         return password;
+    }
+
+    /** Addresses new password generation each time a new Event object is initialized from datastore values, 
+    allowing for existing passwords to be set on such new objects from their saved values in entities. **/
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public String getOrganizer(){

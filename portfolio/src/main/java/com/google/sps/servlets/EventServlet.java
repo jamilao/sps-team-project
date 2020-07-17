@@ -8,16 +8,6 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
-package com.google.sps.servlets;
-
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.datastore.Key;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 
@@ -31,7 +21,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/event")
 public class EventServlet extends HttpServlet { 
   ArrayList<Event> events = new ArrayList<>();
@@ -58,8 +47,9 @@ public class EventServlet extends HttpServlet {
         String description = (String) entity.getProperty("description");
         Date start = (Date) entity.getProperty("start");
         Date end = (Date) entity.getProperty("end");
-
-        Event event = new Event(organizer,eventName,location,description,start,end);
+        Key key = entity.getKey();
+        Event event = new Event(organizer,eventName,location,description,start,end,key);
+        event.setPassword((String) entity.getProperty("password"));
         events.add(event);
       }
     catch (EntityNotFoundException enfe) {

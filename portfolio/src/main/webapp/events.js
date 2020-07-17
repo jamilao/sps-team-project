@@ -22,9 +22,9 @@ async function fetchEvents(){
             var location = document.createElement("h4");
             location.innerText = "Location: " + event.location;
             newDiv.append(location);
-            var date = document.createElement("h4");
-            date.innerText = "Date: " + event.date;
-            newDiv.append(date);
+            var start = document.createElement("h4");
+            start.innerText = "Start time: " + event.start;
+            newDiv.append(start);
             container.append(newDiv);
             console.log("Event added");
         });

@@ -9,11 +9,12 @@ function grabPosition(userLat, userLng){
     console.log(position["lng"]);
     localStorage.setItem("userLat", position["lat"]);
     localStorage.setItem("userLng", position["lng"]);
+    document.getElementById('centerCoord').value = [userLat, userLng];
 }
 
 //Sets latitude and longitude.
 function giveLatitude(){
-    setLat = parseFloat(localStorage.getItem("userLat")); //TO-DO: Find a way to store values that isn't local.
+    setLat = parseFloat(localStorage.getItem("userLat"));
     return setLat;
 }
 function giveLongitude(){
@@ -25,6 +26,8 @@ function storeCoords(lat, lng){
     var position = {lat: lat, lng: lng}; 
     pathList.push(position);
     localStorage.setItem("pathList", JSON.stringify(pathList));
+    document.getElementById('pathCoords').value = JSON.stringify(pathList);
+    
 }
 
 function removeCoord(lat, lng){
@@ -36,6 +39,13 @@ function removeCoord(lat, lng){
         }
     }
     localStorage.setItem("pathList", JSON.stringify(pathList));
+    document.getElementById('pathCoords').value = JSON.stringify(pathList);
+}
+
+function clearPath(){
+    pathList = new Array();
+    localStorage.setItem("pathList", JSON.stringify(pathList));
+    document.getElementById('pathCoords').value = JSON.stringify(pathList);
 }
 
 function givePath(){
