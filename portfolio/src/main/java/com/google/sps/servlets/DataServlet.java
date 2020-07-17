@@ -35,7 +35,7 @@ import java.text.ParseException;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    ArrayList<EventData> events = new ArrayList<>();
+    ArrayList<Event> events = new ArrayList<>();
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Entity eventEntity = new Entity("Event");
@@ -46,10 +46,10 @@ public class DataServlet extends HttpServlet {
     String description = request.getParameter("description");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Date date = new Date();
-    try{
+    try {
         date = sdf.parse(request.getParameter("date"));
     } 
-    catch (ParseException pe){
+    catch (ParseException pe) {
         System.out.println(pe);
         return;
     }
@@ -75,7 +75,7 @@ public class DataServlet extends HttpServlet {
             String location = (String) entity.getProperty("location");
             String description = (String) entity.getProperty("description");
             Date date = (Date) entity.getProperty("date");
-            EventData event = new EventData(organizer,eventName,location,description,date);
+            Event event = new Event(organizer,eventName,location,description,date);
             events.add(event);
         }
         String json_events = convertToJson(events);
@@ -86,20 +86,5 @@ public class DataServlet extends HttpServlet {
       Gson gson = new Gson();
       String json = gson.toJson(items);
       return json;
-  }
-  public class EventData {
-      String organizer;
-      String eventName;
-      String location;
-      String description;
-      String date;
-      public EventData(String organizer, String eventName, String location, String description, Date date){
-          this.organizer = organizer;
-          this.eventName = eventName;
-          this.location = location;
-          this.description = description;
-          DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-          this.date = dateFormat.format(date);
-      }
   }
 }
