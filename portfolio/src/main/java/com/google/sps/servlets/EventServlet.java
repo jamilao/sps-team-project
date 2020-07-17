@@ -46,9 +46,10 @@ public class EventServlet extends HttpServlet {
         String eventName = (String) entity.getProperty("eventName");
         String location = (String) entity.getProperty("location");
         String description = (String) entity.getProperty("description");
-        Date date = (Date) entity.getProperty("date");
+        Date start = (Date) entity.getProperty("start");
+        Date end = (Date) entity.getProperty("end");
 
-        Event event = new Event(organizer,eventName,location,description,date);
+        Event event = new Event(organizer,eventName,location,description,start,end);
         events.add(event);
       }
     catch (EntityNotFoundException enfe) {

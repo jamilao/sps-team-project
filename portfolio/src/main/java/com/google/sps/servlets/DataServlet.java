@@ -44,10 +44,18 @@ public class DataServlet extends HttpServlet {
     String eventName = request.getParameter("eventName");
     String location = request.getParameter("location");
     String description = request.getParameter("description");
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Date date = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+    Date start = new Date();
     try {
-        date = sdf.parse(request.getParameter("date"));
+        start = sdf.parse(request.getParameter("start"));
+    } 
+    catch (ParseException pe) {
+        System.out.println(pe);
+        return;
+    }
+    Date end = new Date();
+    try {
+        end = sdf.parse(request.getParameter("end"));
     } 
     catch (ParseException pe) {
         System.out.println(pe);
@@ -58,11 +66,12 @@ public class DataServlet extends HttpServlet {
     eventEntity.setProperty("eventName", eventName);
     eventEntity.setProperty("location", location);
     eventEntity.setProperty("description", description);
-    eventEntity.setProperty("date", date);
+    eventEntity.setProperty("start", start);
+    eventEntity.setProperty("end", end);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(eventEntity);
-    response.sendRedirect("/testForm.html");
+    response.sendRedirect("/organizereventedit.html");
   }
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -74,8 +83,9 @@ public class DataServlet extends HttpServlet {
             String eventName = (String) entity.getProperty("eventName");
             String location = (String) entity.getProperty("location");
             String description = (String) entity.getProperty("description");
-            Date date = (Date) entity.getProperty("date");
-            Event event = new Event(organizer,eventName,location,description,date);
+            Date start = (Date) entity.getProperty("start");
+            Date end = (Date) entity.getProperty("end");
+            Event event = new Event(organizer,eventName,location,description,start,end);
             events.add(event);
         }
         String json_events = convertToJson(events);

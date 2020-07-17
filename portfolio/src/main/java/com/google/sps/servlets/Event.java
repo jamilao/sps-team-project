@@ -6,15 +6,17 @@ public final class Event{
     private final String eventName;
     private final String location;
     private final String description;
-    private final Date date;
+    private final Date start;
+    private final Date end;
     private final String password;
 
-    public Event(String organizer, String eventName, String location, String description, Date date){
+    public Event(String organizer, String eventName, String location, String description, Date start, Date end){
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
         this.description = description;
-        this.date = date;
+        this.start = start;
+        this.end = end;
         this.password = generatePassword();
     }
 
@@ -49,5 +51,13 @@ public final class Event{
     
     public String getDescription(){
        return description;
+    }
+    
+    public Date getStart(){
+        return start;
+    }
+
+    public Date getEnd(){
+        return end;
     }
 }

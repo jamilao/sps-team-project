@@ -20,7 +20,7 @@
     </div>
     
     <div>
-        <form method="post" action="">
+        <form method="post" action="/data">
         <table style="width:100%">
             <tr>
                 <td style="height:300px; width:50%"> <!-- MAP GOES HERE -->
@@ -37,7 +37,7 @@
                             <td colspan="2" height="50px"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="text" name="Title" placeholder="Title of Protest" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>
+                            <td colspan="2"><input type="text" name="eventName" placeholder="Title of Protest" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>
                         </tr>
                         <tr>
                             <td colspan="2" height="25px"></td>
@@ -49,7 +49,10 @@
                             <td colspan="2" height="25px"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="text" name="time" placeholder="Time" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>
+                            <td colspan="2"><input type="datetime-local" name="start" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><input type="datetime-local" name="end" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>
                         </tr>
                         <tr>
                             <td colspan="2" height="25px"></td>
