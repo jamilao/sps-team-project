@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/event")
 public class EventServlet extends HttpServlet { 
-  ArrayList<EventData> events = new ArrayList<>();
+  ArrayList<Event> events = new ArrayList<>();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
       int eventKey = Integer.parseInt(request.getParameter("key"));   
@@ -33,7 +33,7 @@ public class EventServlet extends HttpServlet {
       String description = (String) entity.getProperty("description");
       Date date = (Date) entity.getProperty("date");
 
-      EventData event = new EventData(organizer,eventName,location,description,date);
+      Event event = new Event(organizer,eventName,location,description,date);
       events.add(event);
       
       String json_events = convertToJson(events);
