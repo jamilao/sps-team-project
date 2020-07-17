@@ -100,9 +100,8 @@
                         <tr>
                             <!-- TO-DO: Send the values set by map.js to a Java servlet, to store the coordinate values in Event objects.-->
                             <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
-                            <td><input type="text" name="centerCoord" id="centerCoord" value="" readonly/>
-                            <input type="text" name="pathCoords" id="pathCoords" value="" readonly/></td>
-                            <!--<td><button type="button" onclick="clearPath()">Clear Path</button></td>-->
+                            <td><input type="hidden" name="centerCoord" id="centerCoord" value=""/>
+                            <input type="hidden" name="pathCoords" id="pathCoords" value=""/></td>
                         </tr>
                         <tr>
                             <td colspan="2" height="25px"></td>

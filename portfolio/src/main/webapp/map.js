@@ -5,11 +5,10 @@ var pathList = new Array();
 function grabPosition(userLat, userLng){
     position["lat"] = userLat;
     position["lng"] = userLng;
-    console.log(position["lat"]);
-    console.log(position["lng"]);
     localStorage.setItem("userLat", position["lat"]);
     localStorage.setItem("userLng", position["lng"]);
-    document.getElementById('centerCoord').value = [userLat, userLng];
+    var centerPos = {lat: userLat, lng: userLng};
+    document.getElementById('centerCoord').value = JSON.stringify(centerPos);
 }
 
 //Sets latitude and longitude.
@@ -27,27 +26,18 @@ function storeCoords(lat, lng){
     pathList.push(position);
     localStorage.setItem("pathList", JSON.stringify(pathList));
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
-    
 }
 
 function removeCoord(lat, lng){
     var position = {lat: lat, lng: lng};
     for (i = 0; i < pathList.length; i++) {
         if ((position.lat == pathList[i].lat) && (position.lng == pathList[i].lng)){
-            console.log("true");
             pathList.splice(i, 1);
         }
     }
     localStorage.setItem("pathList", JSON.stringify(pathList));
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
 }
-
-// Clear path currently does not remove markers from the map, even if it clears the array.
-/*function clearPath(){
-    pathList = new Array();
-    localStorage.setItem("pathList", JSON.stringify(pathList));
-    document.getElementById('pathCoords').value = JSON.stringify(pathList);
-}*/
 
 function givePath(){
     var path = JSON.parse(localStorage.getItem("pathList"));

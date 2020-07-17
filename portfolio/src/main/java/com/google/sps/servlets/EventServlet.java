@@ -48,7 +48,9 @@ public class EventServlet extends HttpServlet {
         Date start = (Date) entity.getProperty("start");
         Date end = (Date) entity.getProperty("end");
         Key key = entity.getKey();
-        Event event = new Event(organizer,eventName,location,description,start,end,key);
+        String centerCoord = (String) entity.getProperty("centerCoord");
+        String pathCoords = (String) entity.getProperty("pathCoords");
+        Event event = new Event(organizer,eventName,location,description,start,end,key, centerCoord, pathCoords);
         event.setPassword((String) entity.getProperty("password"));
         events.add(event);
       }
