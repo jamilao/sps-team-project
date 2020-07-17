@@ -68,11 +68,17 @@ public class DataServlet extends HttpServlet {
     eventEntity.setProperty("description", description);
     eventEntity.setProperty("start", start);
     eventEntity.setProperty("end", end);
+    Event event = new Event(organizer, eventName, location, description, start, end);
+    String password = event.getPassword();
+    eventEntity.setProperty("password", password);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(eventEntity);
-    response.sendRedirect("/organizereventedit.html");
+
+    // Displays password for the newly generated event in a new window.
+    response.getOutputStream().println("<p>Your password is " + password + "</p><br>");
   }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Event");
@@ -86,6 +92,7 @@ public class DataServlet extends HttpServlet {
             Date start = (Date) entity.getProperty("start");
             Date end = (Date) entity.getProperty("end");
             Event event = new Event(organizer,eventName,location,description,start,end);
+            event.setPassword((String) entity.getProperty("password"));
             events.add(event);
         }
         String json_events = convertToJson(events);
