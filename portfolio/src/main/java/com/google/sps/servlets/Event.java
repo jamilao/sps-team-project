@@ -9,8 +9,9 @@ public final class Event{
     private final Date start;
     private final Date end;
     private final String password;
+    private final String key;
 
-    public Event(String organizer, String eventName, String location, String description, Date start, Date end){
+    public Event(String organizer, String eventName, String location, String description, Date start, Date end, String key){
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
@@ -18,6 +19,7 @@ public final class Event{
         this.start = start;
         this.end = end;
         this.password = generatePassword();
+        this.key = key;
     }
 
     private String generatePassword(){
