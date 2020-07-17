@@ -22,6 +22,17 @@
     </style>
   </head>
   <body>
+
+    <!-- TO-DO: Send the values set by map.js to a Java servlet, to store the coordinate values in Event objects.-->
+    <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
+    <form action="/data">
+        <input type="text" name="centerCoord" id="centerCoord" value="" />
+        <input type="text" name="pathCoords" id="pathCoords" value="" />
+        <button>Save</button>
+    </form>
+
+    <button onclick="clearPath()">Clear</button>
+    
     <div id="map"></div>
     <script>
       // Note: This example requires that you consent to location sharing when
