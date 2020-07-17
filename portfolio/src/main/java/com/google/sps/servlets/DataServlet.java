@@ -35,7 +35,7 @@ import java.text.ParseException;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    ArrayList<EventData> events = new ArrayList<>();
+    ArrayList<Event> events = new ArrayList<>();
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Entity eventEntity = new Entity("Event");
@@ -44,12 +44,20 @@ public class DataServlet extends HttpServlet {
     String eventName = request.getParameter("eventName");
     String location = request.getParameter("location");
     String description = request.getParameter("description");
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    Date date = new Date();
-    try{
-        date = sdf.parse(request.getParameter("date"));
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
+    Date start = new Date();
+    try {
+        start = sdf.parse(request.getParameter("start"));
     } 
-    catch (ParseException pe){
+    catch (ParseException pe) {
+        System.out.println(pe);
+        return;
+    }
+    Date end = new Date();
+    try {
+        end = sdf.parse(request.getParameter("end"));
+    } 
+    catch (ParseException pe) {
         System.out.println(pe);
         return;
     }
@@ -58,11 +66,12 @@ public class DataServlet extends HttpServlet {
     eventEntity.setProperty("eventName", eventName);
     eventEntity.setProperty("location", location);
     eventEntity.setProperty("description", description);
-    eventEntity.setProperty("date", date);
+    eventEntity.setProperty("start", start);
+    eventEntity.setProperty("end", end);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(eventEntity);
-    response.sendRedirect("/testForm.html");
+    response.sendRedirect("/organizereventedit.html");
   }
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -74,8 +83,9 @@ public class DataServlet extends HttpServlet {
             String eventName = (String) entity.getProperty("eventName");
             String location = (String) entity.getProperty("location");
             String description = (String) entity.getProperty("description");
-            Date date = (Date) entity.getProperty("date");
-            EventData event = new EventData(organizer,eventName,location,description,date);
+            Date start = (Date) entity.getProperty("start");
+            Date end = (Date) entity.getProperty("end");
+            Event event = new Event(organizer,eventName,location,description,start,end);
             events.add(event);
         }
         String json_events = convertToJson(events);
@@ -86,20 +96,5 @@ public class DataServlet extends HttpServlet {
       Gson gson = new Gson();
       String json = gson.toJson(items);
       return json;
-  }
-  public class EventData {
-      String organizer;
-      String eventName;
-      String location;
-      String description;
-      String date;
-      public EventData(String organizer, String eventName, String location, String description, Date date){
-          this.organizer = organizer;
-          this.eventName = eventName;
-          this.location = location;
-          this.description = description;
-          DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-          this.date = dateFormat.format(date);
-      }
   }
 }
