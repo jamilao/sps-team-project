@@ -2,9 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>My Portfolio</title>
+    <title>Edit Event</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <script src="map.js"></script>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
   </head>
   <body style="margin:0px; background:#dfe0e2">
     <div class="header" style="padding:30px; background:black; color:#23b5d3">
@@ -20,13 +23,75 @@
     </div>
     
     <div>
-        <form method="post" action="/data">
+        <h1 id="eventSaved"></h1>
+        <form method="post" action="/data" target="_blank">
         <table style="width:100%">
             <tr>
-                <td style="height:300px; width:50%"> <!-- MAP GOES HERE -->
-                    <table style=""> 
+                <!--Height must be declared or map will not show up.-->
+                <td style="height:300px; width:50%;" id="map">
+                    <table style="height:300px; width:100%"> 
                         <tr>
-                            
+                            <script>
+                            var map, infoWindow;
+                            function initMap() {
+                                map = new google.maps.Map(document.getElementById('map'), {
+                                center: {lat: 40.7, lng: -74},
+                                zoom: 11
+                                });
+                                infoWindow = new google.maps.InfoWindow;
+
+                                // Try HTML5 geolocation.
+                                if (navigator.geolocation) {
+                                navigator.geolocation.getCurrentPosition(function(position) {
+                                    var userLat = position.coords.latitude;
+                                    var userLng = position.coords.longitude;
+                                    var pos = {
+                                    lat: userLat,
+                                    lng: userLng
+                                    };
+                                    grabPosition(userLat, userLng);
+
+                                    infoWindow.setPosition(pos);
+                                    infoWindow.setContent('You are here.');
+                                    infoWindow.open(map);
+                                    map.setCenter(pos);
+                                }, function() {
+                                    handleLocationError(true, infoWindow, map.getCenter());
+                                });
+                                } else {
+                                // Browser doesn't support Geolocation
+                                handleLocationError(false, infoWindow, map.getCenter());
+                                }
+
+                                //Allow organizer to click on map to place a marker.
+                                map.addListener("click", function(e){
+                                    var marker = new google.maps.Marker({
+                                        position: e.latLng,
+                                        map: map,
+                                        draggable: false
+                                    });
+
+                                    //Click on marker to remove it in case of mis-clicks.
+                                    marker.addListener('click', function(f){
+                                        removeCoord(marker.position.lat(), marker.position.lng());
+                                        marker.setMap(null);
+                                    });
+
+                                    storeCoords(marker.position.lat(), marker.position.lng());
+                                });
+                            }
+
+                            function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+                                infoWindow.setPosition(pos);
+                                infoWindow.setContent(browserHasGeolocation ?
+                                                    'Error: The Geolocation service failed.' :
+                                                    'Error: Your browser doesn\'t support geolocation.');
+                                infoWindow.open(map);
+                            }
+                            </script>
+                            <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ00Z_l0PN-jiIyiUHTjn_jdnlY8HNn34&callback=initMap">
+                            </script>
                         </tr>
                     </table>
                 </td>
@@ -34,7 +99,17 @@
                     
                     <table style="width:100%">
                         <tr>
-                            <td colspan="2" height="50px"></td>
+                            <!-- TO-DO: Send the values set by map.js to a Java servlet, to store the coordinate values in Event objects.-->
+                            <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
+                            <form action="/data">
+                                <input type="text" name="centerCoord" id="centerCoord" value="" />
+                                <input type="text" name="pathCoords" id="pathCoords" value="" />
+                                <button>Save Path</button>
+                            </form>
+                            <button onclick="clearPath()">Clear</button>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="25px"></td>
                         </tr>
                         <tr>
                             <td colspan="2"><input type="text" name="eventName" placeholder="Title of Protest" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>

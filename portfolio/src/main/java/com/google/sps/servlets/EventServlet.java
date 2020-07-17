@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/event")
 public class EventServlet extends HttpServlet { 
   ArrayList<Event> events = new ArrayList<>();
@@ -50,6 +49,7 @@ public class EventServlet extends HttpServlet {
         Date end = (Date) entity.getProperty("end");
 
         Event event = new Event(organizer,eventName,location,description,start,end);
+        event.setPassword((String) entity.getProperty("password"));
         events.add(event);
       }
     catch (EntityNotFoundException enfe) {
