@@ -10,6 +10,7 @@ async function fetchEvents(){
             console.log(event);
             var newDiv = document.createElement("div");
             newDiv.setAttribute("class","child");
+            newDiv.setAttribute("id",event.key.id.toString());
             var imgContainer = document.createElement("div");
             imgContainer.setAttribute("class","img-container");
             var image = document.createElement("img");

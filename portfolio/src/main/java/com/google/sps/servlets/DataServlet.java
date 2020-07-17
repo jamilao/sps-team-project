@@ -20,6 +20,8 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.KeyFactory;
+import com.google.appengine.api.datastore.Key;
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -68,7 +70,8 @@ public class DataServlet extends HttpServlet {
     eventEntity.setProperty("description", description);
     eventEntity.setProperty("start", start);
     eventEntity.setProperty("end", end);
-    Event event = new Event(organizer, eventName, location, description, start, end);
+    Key key = eventEntity.getKey();
+    Event event = new Event(organizer, eventName, location, description, start, end, key);
     String password = event.getPassword();
     eventEntity.setProperty("password", password);
 
@@ -91,7 +94,8 @@ public class DataServlet extends HttpServlet {
             String description = (String) entity.getProperty("description");
             Date start = (Date) entity.getProperty("start");
             Date end = (Date) entity.getProperty("end");
-            Event event = new Event(organizer,eventName,location,description,start,end);
+            Key key = entity.getKey();
+            Event event = new Event(organizer,eventName,location,description,start,end,key);
             event.setPassword((String) entity.getProperty("password"));
             events.add(event);
         }

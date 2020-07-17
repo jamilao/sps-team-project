@@ -1,4 +1,5 @@
 package com.google.sps.servlets;
+import com.google.appengine.api.datastore.Key;
 import java.util.*;
 
 public final class Event{
@@ -9,8 +10,9 @@ public final class Event{
     private final Date start;
     private final Date end;
     private String password;
+    private final Key key;
 
-    public Event(String organizer, String eventName, String location, String description, Date start, Date end){
+    public Event(String organizer, String eventName, String location, String description, Date start, Date end, Key key){
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
@@ -18,6 +20,7 @@ public final class Event{
         this.start = start;
         this.end = end;
         this.password = generatePassword();
+        this.key = key;
     }
 
     private String generatePassword(){
