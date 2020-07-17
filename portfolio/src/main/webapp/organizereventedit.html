@@ -24,19 +24,14 @@
     
     <div>
         <h1 id="eventSaved"></h1>
-        <form method="post" action="/data" onsubmit="getPassword()" target="_blank">
+        <form method="post" action="/data" target="_blank">
         <table style="width:100%">
             <tr>
-                <td style="height:500px; width:50%">
-                    <table style="width:100%"> 
+                <!--Height must be declared or map will not show up.-->
+                <td style="height:300px; width:50%;" id="map">
+                    <table style="height:300px; width:100%"> 
                         <tr>
-                            
-                            <div style="height:500px; width:100%;" id="map"></div>
                             <script>
-                            // Note: This example requires that you consent to location sharing when
-                            // prompted by your browser. If you see the error "The Geolocation service
-                            // failed.", it means you probably did not give permission for the browser to
-                            // locate you.
                             var map, infoWindow;
                             function initMap() {
                                 map = new google.maps.Map(document.getElementById('map'), {
@@ -68,8 +63,7 @@
                                 handleLocationError(false, infoWindow, map.getCenter());
                                 }
 
-                                //Allow organizer to click on map to place a marker. 
-                                //TO-DO: Instead of displaying separate markers, draw path connecting each mouse click.
+                                //Allow organizer to click on map to place a marker.
                                 map.addListener("click", function(e){
                                     var marker = new google.maps.Marker({
                                         position: e.latLng,
@@ -98,17 +92,6 @@
                             <script async defer
                             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ00Z_l0PN-jiIyiUHTjn_jdnlY8HNn34&callback=initMap">
                             </script>
-
-                            <!-- TO-DO: Send the values set by map.js to a Java servlet, to store the coordinate values in Event objects.-->
-                            <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
-                            <form action="/data">
-                                <input type="text" name="centerCoord" id="centerCoord" value="" />
-                                <input type="text" name="pathCoords" id="pathCoords" value="" />
-                                <button>Save</button>
-                            </form>
-
-                            <button onclick="clearPath()">Clear</button>
-
                         </tr>
                     </table>
                 </td>
@@ -116,7 +99,17 @@
                     
                     <table style="width:100%">
                         <tr>
-                            <td colspan="2" height="50px"></td>
+                            <!-- TO-DO: Send the values set by map.js to a Java servlet, to store the coordinate values in Event objects.-->
+                            <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
+                            <form action="/data">
+                                <input type="text" name="centerCoord" id="centerCoord" value="" />
+                                <input type="text" name="pathCoords" id="pathCoords" value="" />
+                                <button>Save Path</button>
+                            </form>
+                            <button onclick="clearPath()">Clear</button>
+                        </tr>
+                        <tr>
+                            <td colspan="2" height="25px"></td>
                         </tr>
                         <tr>
                             <td colspan="2"><input type="text" name="eventName" placeholder="Title of Protest" style="width:800px; height:50px; font-size:18px; border-radius: 5px;"></td>
