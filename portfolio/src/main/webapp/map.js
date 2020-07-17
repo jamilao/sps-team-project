@@ -42,11 +42,12 @@ function removeCoord(lat, lng){
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
 }
 
-function clearPath(){
+// Clear path currently does not remove markers from the map, even if it clears the array.
+/*function clearPath(){
     pathList = new Array();
     localStorage.setItem("pathList", JSON.stringify(pathList));
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
-}
+}*/
 
 function givePath(){
     var path = JSON.parse(localStorage.getItem("pathList"));

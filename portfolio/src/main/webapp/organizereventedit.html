@@ -23,7 +23,6 @@
     </div>
     
     <div>
-        <h1 id="eventSaved"></h1>
         <form method="post" action="/data" target="_blank">
         <table style="width:100%">
             <tr>
@@ -101,12 +100,9 @@
                         <tr>
                             <!-- TO-DO: Send the values set by map.js to a Java servlet, to store the coordinate values in Event objects.-->
                             <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
-                            <form action="/data">
-                                <input type="text" name="centerCoord" id="centerCoord" value="" />
-                                <input type="text" name="pathCoords" id="pathCoords" value="" />
-                                <button>Save Path</button>
-                            </form>
-                            <button onclick="clearPath()">Clear</button>
+                            <td><input type="text" name="centerCoord" id="centerCoord" value="" readonly/>
+                            <input type="text" name="pathCoords" id="pathCoords" value="" readonly/></td>
+                            <!--<td><button type="button" onclick="clearPath()">Clear Path</button></td>-->
                         </tr>
                         <tr>
                             <td colspan="2" height="25px"></td>
@@ -157,7 +153,7 @@
                             <td colspan="2" height="35px"></td>
                         </tr>
                         <tr>
-                            <td width="500px"></td><td><button style="height:80px; width:300px;font-size:30px">Save Changes</button></td>
+                            <td width="500px"></td><td><button style="height:80px; width:300px;font-size:30px" type="submit">Save Changes</button></td>
                         </tr>
                         
                     </table>
