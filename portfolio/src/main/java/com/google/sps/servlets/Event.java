@@ -11,8 +11,10 @@ public final class Event{
     private final Date end;
     private String password;
     private final Key key;
+    private String centerCoord;
+    private String pathCoords;
 
-    public Event(String organizer, String eventName, String location, String description, Date start, Date end, Key key){
+    public Event(String organizer, String eventName, String location, String description, Date start, Date end, Key key, String centerCoord, String pathCoords){
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
@@ -21,12 +23,14 @@ public final class Event{
         this.end = end;
         this.password = generatePassword();
         this.key = key;
+        this.centerCoord = centerCoord;
+        this.pathCoords = pathCoords;
     }
 
     private String generatePassword(){
         String password = "";
         for (int i = 0; i < 5; i++){
-            char rand = (char)((int)(Math.random() * 97) + 33); 
+            char rand = (char)((int)(Math.random() * 93) + 33); 
             password = password + rand;
         }
         return password;
@@ -44,6 +48,14 @@ public final class Event{
     allowing for existing passwords to be set on such new objects from their saved values in entities. **/
     public void setPassword(String password){
         this.password = password;
+    }
+    
+    public void setCenterCoord(String centerCoord){
+        this.centerCoord = centerCoord;
+    }
+
+    public void setPathCoords(String pathCoords){
+        this.pathCoords = pathCoords;
     }
 
     public String getOrganizer(){
@@ -68,5 +80,13 @@ public final class Event{
 
     public Date getEnd(){
         return end;
+    }
+
+    public String getCenterCoord(){
+        return centerCoord;
+    }
+
+    public String getPathCoords(){
+        return pathCoords;
     }
 }
