@@ -1,10 +1,21 @@
+
+@font-face{
+    font-family: 'Scada', sans-serif;
+    font-family:'Titillium Web', sans-serif;
+
+}
+
 /* Style the tab */
 .tab {
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: #23B5D2;
+  background-color: #23B5D3;
 }
 
+/* Create a box around the text */
+.boxed {
+  border: 60px solid green ;
+}
 /* Style the buttons inside the tab */
 .tab button {
   background-color: inherit;
@@ -15,6 +26,7 @@
   padding: 14px 16px;
   transition: 0.3s;
   font-size: 17px;
+  
 }
 
 /* Change background color of buttons on hover */
@@ -45,9 +57,10 @@
     background: transparent;
     }
 body, form {
-    background-color: lightgray;
+    background-color: white;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
+    
 }
 button, select {
     color: white;
@@ -61,6 +74,12 @@ img {
     max-height: 100%;
 }
 
+h2{
+
+    font-family: 'Titillium Web', sans-serif;
+
+}
+
 h40 {
     font-size: 20px;
     padding-left: 0;
@@ -69,13 +88,19 @@ h40 {
     padding-top: 20px;
 }
 a {
-    color: white;
+    color: #75ABBC;
 }
 a.internal {
     text-decoration: none;
 }
-a:visited, a:hover {
-    color: #faf3dd;
+a:visited {
+    color: #75ABBC;
+}
+
+a:hover{
+
+    color: white;
+
 }
 form {
     margin-left: auto;
@@ -102,7 +127,7 @@ form {
     width: 300px;
     margin: 5px;
     padding: 20px;
-    background-color: #23B5D2;
+    background-color: #23B5D3;
 }
 .dropbtn {
   background-color: gray;
@@ -142,7 +167,7 @@ form {
     padding-top: 15px;
 }
 #protest_menu {
-    background-color: #23B5D2;
+    background-color: #23B5D3;
     padding: 30px;
     display: flex;
     flex-direction: row;
@@ -164,4 +189,11 @@ form {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+p {
+    font-size:30px;
+    background-color: #dfe0e2;
+    font-family: 'Titillium Web', sans-serif;
+    color: #75ABBC
 }

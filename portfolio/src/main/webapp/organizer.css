@@ -1,3 +1,9 @@
+@font-face{
+    font-family: 'Scada', sans-serif;
+    font-family:'Titillium Web', sans-serif;
+
+}
+
 #content {
   margin-left: auto;
   margin-right: auto;
@@ -31,4 +37,115 @@
 	background: none;
 	padding: 0 5px;
 	height: 40px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    }
+body, form {
+    background-color: lightgray;
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+}
+button, select {
+    color: white;
+}
+section {
+    padding: 30px;
+    border: 0;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+h40 {
+    font-size: 20px;
+    padding-left: 0;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+a {
+    color: #75ABBC;;
+}
+a.internal {
+    text-decoration: none;
+}
+a:visited  {
+    color: #75ABBC;
+}
+
+a:hover  {
+    color: white;
+}
+form {
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+}
+.main {
+    margin: 20px;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+.img-container {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+.child {
+    height: 300px;
+    width: 300px;
+    margin: 5px;
+    padding: 20px;
+    background-color: #23B5D2;
+}
+.dropbtn {
+  background-color: gray;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+#nav_bar {
+    top: 0;
+    background-color: black;
+    padding-bottom: 0;
+    padding-top: 15px;
 }

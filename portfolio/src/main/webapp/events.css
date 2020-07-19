@@ -1,3 +1,10 @@
+
+@font-face{
+    font-family: 'Scada', sans-serif;
+    font-family:'Titillium Web', sans-serif;
+
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,7 +17,7 @@
 body, form {
     background-color: lightgray;
     color: white;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Titillium Web', sans-serif;
 }
 button, select {
     color: white;
@@ -41,15 +48,21 @@ h4 {
     padding-right: 20px;
     padding-bottom: 20px;
     padding-top: 20px;
+    font-weight:400;
 }
 a {
-    color: white;
+    color: #75ABBC;
 }
 a.internal {
     text-decoration: none;
 }
-a:visited, a:hover {
-    color: #faf3dd;
+a:visited  {
+    color: #75ABBC;
+}
+a:hover{
+
+    color: white;
+
 }
 form {
     margin-left: auto;
