@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ public class EventServlet extends HttpServlet {
   ArrayList<Event> events = new ArrayList<>();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      Key eventKey = KeyFactory.stringToKey(request.getParameter("key"));   
+      Key eventKey = KeyFactory.createKey("Event",Long.parseLong(request.getParameter("id")));   
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
       findEvent(datastore, eventKey);
@@ -47,8 +48,7 @@ public class EventServlet extends HttpServlet {
         String description = (String) entity.getProperty("description");
         Date start = (Date) entity.getProperty("start");
         Date end = (Date) entity.getProperty("end");
-        Key key = entity.getKey();
-        Event event = new Event(organizer,eventName,location,description,start,end,key);
+        Event event = new Event(organizer,eventName,location,description,start,end,eventKey);
         event.setPassword((String) entity.getProperty("password"));
         events.add(event);
       }
