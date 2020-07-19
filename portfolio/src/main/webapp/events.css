@@ -83,6 +83,7 @@ form {
     display: flex;
     justify-content: center;
     margin: 0;
+    cursor: pointer;
 }
 .child {
     height: 300px;
