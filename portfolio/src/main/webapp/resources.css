@@ -5,6 +5,48 @@
 
 }
 
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #23B5D3;
+}
+
+/* Create a box around the text */
+.boxed {
+  border: 60px solid green ;
+}
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -15,9 +57,10 @@
     background: transparent;
     }
 body, form {
-    background-color: lightgray;
+    background-color: white;
     color: white;
     font-family: 'Titillium Web', sans-serif;
+    
 }
 button, select {
     color: white;
@@ -30,25 +73,19 @@ img {
     max-width: 100%;
     max-height: 100%;
 }
-h1{
-    padding: 10px;
-    font-size: 48px;
+
+h2{
+
+    font-family: 'Titillium Web', sans-serif;
+
 }
-h2 {
-    font-size: 36px; 
-}
-h3 {
-    padding-bottom: 10px;
-    font-size: 30px;
-    font-style: bold;
-}
-h4 {
+
+h40 {
     font-size: 20px;
     padding-left: 0;
     padding-right: 20px;
     padding-bottom: 20px;
     padding-top: 20px;
-    font-weight:400;
 }
 a {
     color: #75ABBC;
@@ -56,9 +93,10 @@ a {
 a.internal {
     text-decoration: none;
 }
-a:visited  {
+a:visited {
     color: #75ABBC;
 }
+
 a:hover{
 
     color: white;
@@ -83,14 +121,13 @@ form {
     display: flex;
     justify-content: center;
     margin: 0;
-    cursor: pointer;
 }
 .child {
     height: 300px;
     width: 300px;
     margin: 5px;
     padding: 20px;
-    background-color: #23B5D2;
+    background-color: #23B5D3;
 }
 .dropbtn {
   background-color: gray;
@@ -130,7 +167,7 @@ form {
     padding-top: 15px;
 }
 #protest_menu {
-    background-color: #23B5D2;
+    background-color: #23B5D3;
     padding: 30px;
     display: flex;
     flex-direction: row;
@@ -152,4 +189,11 @@ form {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+p {
+    font-size:30px;
+    background-color: #dfe0e2;
+    font-family: 'Titillium Web', sans-serif;
+    color: #75ABBC
 }
