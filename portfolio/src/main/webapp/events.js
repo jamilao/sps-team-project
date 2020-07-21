@@ -59,7 +59,7 @@ function checkPassword(){
                 localStorage.setItem("start", event.start);
                 localStorage.setItem("end", event.end);
                 localStorage.setItem("description", event.description);
-                window.location.href = "https://8080-dot-12492354-dot-devshell.appspot.com/organizereventedit.html";
+                document.getElementById('main').innerHTML='<object style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;" type="text/html" data="organizereventedit.html"></object>';
             }
             else{
                 alert("Incorrect password.");
