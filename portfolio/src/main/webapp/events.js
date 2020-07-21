@@ -48,6 +48,7 @@ function displayEvent(){
     Http.send();
     Http.onreadystatechange = function(){
         if(this.readyState==4 && this.status==200){
+            
             event = (Http.response)[0];
             console.log(event);
             console.log('HTTP request complete');
