@@ -35,6 +35,50 @@ async function fetchEvents(){
         });
     });
 }
+
+// This method successfully checks a password and displays the edit page.
+// TO-DO: Fix bug where the first event loaded/clicked in events.html has its data persist (i.e. password, displayed info).
+function checkPassword(){
+    const Http = new XMLHttpRequest();
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const url = "/event?id=" + id;
+    var event = null;
+    Http.responseType = 'json';
+    Http.open("GET", url);
+    Http.send();
+    Http.onreadystatechange = function(){
+        if(this.readyState==4 && this.status==200){
+            event = (Http.response)[0];
+            var password = document.getElementById('password').value;
+            console.log(password);
+            console.log(event.password);
+            if (password === event.password){
+                localStorage.setItem("eventName", event.eventName);
+                localStorage.setItem("location", event.location);
+                localStorage.setItem("start", event.start);
+                localStorage.setItem("end", event.end);
+                localStorage.setItem("description", event.description);
+                document.getElementById('main').innerHTML='<object style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;" type="text/html" data="organizereventedit.html"></object>';
+            }
+            else{
+                alert("Incorrect password.");
+            }
+        }
+    }
+}
+
+// TO-DO: Clear local storage after saving event. Saved event should replace existing datastore entry.
+function fillForm(){
+    document.getElementsByName('eventName')[0].value=localStorage.getItem("eventName");
+    document.getElementsByName('location')[0].value=localStorage.getItem("location");
+    var start = new Date(localStorage.getItem("start")).toISOString().substring(0, 16);
+    var end = new Date(localStorage.getItem("end")).toISOString().substring(0, 16);
+    document.getElementsByName('start')[0].value=start;
+    document.getElementsByName('end')[0].value=end;
+    document.getElementsByName('description')[0].value=localStorage.getItem("description");
+}
+
 function displayEvent(){
     console.log("Calling displayEvent()");
     const Http = new XMLHttpRequest();
@@ -71,7 +115,10 @@ function displayEvent(){
             start.innerText = "When: " + event.start;
             newDiv.append(start);
             container.append(newDiv);
+            var passwordDiv = document.createElement("div");
+            passwordDiv.innerHTML = "<input type='text' id='password' placeholder='Password'/><button type='button' onclick='checkPassword()'>Edit Event</button>";
+            container.append(passwordDiv);
             console.log("Event added");
         }
-    }  
+    }
 }
