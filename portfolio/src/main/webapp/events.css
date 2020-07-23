@@ -123,6 +123,12 @@ form {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+.single {
+    margin: 200px auto;
+    width: 600px;
+    height: 600px;
+    font-size: 36px;
+}
 #nav_bar {
     top: 0;
     background-color: black;
