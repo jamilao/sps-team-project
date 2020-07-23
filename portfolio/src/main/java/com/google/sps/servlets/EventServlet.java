@@ -30,7 +30,7 @@ public class EventServlet extends HttpServlet {
       Key eventKey = KeyFactory.createKey("Event",Long.parseLong(request.getParameter("id")));   
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 
-      findEvent(datastore, eventKey);
+      findEvent(datastore, eventKey, events);
 
       String json_events = convertToJsonUsingGson(events);
       response.setContentType("application/json;");
@@ -38,7 +38,7 @@ public class EventServlet extends HttpServlet {
   }
 
   // A separate method to try and handle finding entities.
-  private void findEvent(DatastoreService datastore, Key eventKey) {
+  private void findEvent(DatastoreService datastore, Key eventKey, ArrayList events) {
     try {
         Entity entity = datastore.get(eventKey);
         
