@@ -51,14 +51,15 @@ function checkPassword(){
         if(this.readyState==4 && this.status==200){
             event = (Http.response)[0];
             var password = document.getElementById('password').value;
-            console.log(password);
-            console.log(event.password);
             if (password === event.password){
                 localStorage.setItem("eventName", event.eventName);
                 localStorage.setItem("location", event.location);
                 localStorage.setItem("start", event.start);
                 localStorage.setItem("end", event.end);
                 localStorage.setItem("description", event.description);
+                localStorage.setItem("key", JSON.stringify(event.key));
+                localStorage.setItem("centerCoord", event.centerCoord);
+                localStorage.setItem("pathList", event.pathCoords);
                 document.getElementById('main').innerHTML='<object style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;" type="text/html" data="organizereventedit.html"></object>';
             }
             else{
@@ -70,6 +71,7 @@ function checkPassword(){
 
 // TO-DO: Clear local storage after saving event. Saved event should replace existing datastore entry.
 function fillForm(){
+    document.getElementsByName('key')[0].value=localStorage.getItem("key");
     document.getElementsByName('eventName')[0].value=localStorage.getItem("eventName");
     document.getElementsByName('location')[0].value=localStorage.getItem("location");
     var start = new Date(localStorage.getItem("start")).toISOString().substring(0, 16);
@@ -77,6 +79,9 @@ function fillForm(){
     document.getElementsByName('start')[0].value=start;
     document.getElementsByName('end')[0].value=end;
     document.getElementsByName('description')[0].value=localStorage.getItem("description");
+    window.onbeforeunload = function() {
+        localStorage.clear();
+    }
 }
 
 function displayEvent(){
@@ -123,4 +128,21 @@ function displayEvent(){
             console.log("Event added");
         }
     }
+}
+
+// Check that start and end times are valid.
+function validateForm(){
+    var start = new Date(document.getElementsByName('start')[0].value);
+    var end = new Date(document.getElementsByName('end')[0].value);
+    var currentTime = new Date();
+    if (start >= end){
+        alert("Start time cannot be after or equal to end time!");
+        return false;
+    }
+    if (start < currentTime){
+        alert ("Start time cannot be in the past!");
+        return false;
+    }
+    localStorage.clear();
+    return true;
 }

@@ -23,7 +23,7 @@
     </div>
     
     <div>
-        <form method="post" action="/data" target="_blank">
+        <form method="post" action="/data" target="_blank" onsubmit="return validateForm()">
         <table style="width:100%">
             <tr>
                 <!--Height must be declared or map will not show up.-->
@@ -32,34 +32,62 @@
                         <tr>
                             <script>
                             var map, infoWindow;
+
+
+                            var newMap = 1; //Track if organizer is editing an old map or making a new map. 1 = old map.
+                            try {
+                                var setLat = giveLatitude();
+                                var setLng = giveLongitude();
+                                var pos = {lat: setLat, lng: setLng};
+                            }
+                            catch (se){
+                                console.log(se);
+                                pos = {lat: 40.7, lng: -74};
+                                newMap = 0;
+                            }
+
                             function initMap() {
                                 map = new google.maps.Map(document.getElementById('map'), {
-                                center: {lat: 40.7, lng: -74},
-                                zoom: 11
+                                center: pos,
+                                zoom: 14
                                 });
                                 infoWindow = new google.maps.InfoWindow;
 
-                                // Try HTML5 geolocation.
-                                if (navigator.geolocation) {
-                                navigator.geolocation.getCurrentPosition(function(position) {
-                                    var userLat = position.coords.latitude;
-                                    var userLng = position.coords.longitude;
-                                    var pos = {
-                                    lat: userLat,
-                                    lng: userLng
-                                    };
-                                    grabPosition(userLat, userLng);
+                                if (newMap === 0){
+                                    // Try HTML5 geolocation, if no existing map center is set.
+                                    if (navigator.geolocation) {
+                                    navigator.geolocation.getCurrentPosition(function(position) {
+                                        var userLat = position.coords.latitude;
+                                        var userLng = position.coords.longitude;
+                                        var pos = {
+                                        lat: userLat,
+                                        lng: userLng
+                                        };
+                                        grabPosition(userLat, userLng);
 
-                                    infoWindow.setPosition(pos);
-                                    infoWindow.setContent('You are here.');
-                                    infoWindow.open(map);
-                                    map.setCenter(pos);
-                                }, function() {
-                                    handleLocationError(true, infoWindow, map.getCenter());
-                                });
-                                } else {
-                                // Browser doesn't support Geolocation
-                                handleLocationError(false, infoWindow, map.getCenter());
+                                        infoWindow.setPosition(pos);
+                                        infoWindow.setContent('You are here.');
+                                        infoWindow.open(map);
+                                        map.setCenter(pos);
+                                    }, function() {
+                                        handleLocationError(true, infoWindow, map.getCenter());
+                                    });
+                                    } else {
+                                    // Browser doesn't support Geolocation
+                                    handleLocationError(false, infoWindow, map.getCenter());
+                                    }
+                                }
+
+                                // Draws polyline from hard-coded coordinates. Base code from: https://developers.google.com/maps/documentation/javascript/shapes
+                                else{
+                                    var path = new google.maps.Polyline({
+                                        path: givePath(),
+                                        geodesic: true,
+                                        strokeColor: '#FF0000',
+                                        strokeOpacity: 1.0,
+                                        strokeWeight: 2
+                                    });
+                                    path.setMap(map);
                                 }
 
                                 //Allow organizer to click on map to place a marker.
@@ -102,6 +130,7 @@
                             <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
                             <td><input type="hidden" name="centerCoord" id="centerCoord" value=""/>
                             <input type="hidden" name="pathCoords" id="pathCoords" value=""/></td>
+                            <input type="hidden" name="key" id="key" value=""/></td>
                         </tr>
                         <tr>
                             <td colspan="2" height="25px"></td>

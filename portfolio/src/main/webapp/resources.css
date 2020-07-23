@@ -88,13 +88,13 @@ h40 {
     padding-top: 20px;
 }
 a {
-    color: #75ABBC;
+    color: #23b5d3;
 }
 a.internal {
     text-decoration: none;
 }
 a:visited {
-    color: #75ABBC;
+    color: #23b5d3;
 }
 
 a:hover{
@@ -195,5 +195,5 @@ p {
     font-size:30px;
     background-color: #dfe0e2;
     font-family: 'Titillium Web', sans-serif;
-    color: #75ABBC
+    color: #23b5d3;
 }
