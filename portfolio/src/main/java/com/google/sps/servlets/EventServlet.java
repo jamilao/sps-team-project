@@ -24,9 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/event")
 public class EventServlet extends HttpServlet { 
-  ArrayList<Event> events = new ArrayList<>();
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+      ArrayList<Event> events = new ArrayList<>();
       Key eventKey = KeyFactory.createKey("Event",Long.parseLong(request.getParameter("id")));   
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 

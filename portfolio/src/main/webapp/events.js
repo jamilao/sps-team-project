@@ -98,7 +98,7 @@ function displayEvent(){
     Http.onreadystatechange = function(){
         if(this.readyState==4 && this.status==200){
             
-            event = (Http.response)[Http.response.length - 1];
+            event = (Http.response)[0];
             console.log(event);
             console.log('HTTP request complete');
             const container = document.getElementById('main');
