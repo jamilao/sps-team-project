@@ -49,7 +49,7 @@ function checkPassword(){
     Http.send();
     Http.onreadystatechange = function(){
         if(this.readyState==4 && this.status==200){
-            event = (Http.response)[0];
+            event = (Http.response)[Http.response.length - 1];
             var password = document.getElementById('password').value;
             if (password === event.password){
                 localStorage.setItem("eventName", event.eventName);
@@ -98,7 +98,7 @@ function displayEvent(){
     Http.onreadystatechange = function(){
         if(this.readyState==4 && this.status==200){
             
-            event = (Http.response)[0];
+            event = (Http.response)[Http.response.length - 1];
             console.log(event);
             console.log('HTTP request complete');
             const container = document.getElementById('main');
