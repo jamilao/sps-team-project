@@ -132,8 +132,13 @@ function displayEvent(){
 function validateForm(){
     var start = new Date(document.getElementsByName('start')[0].value);
     var end = new Date(document.getElementsByName('end')[0].value);
+    var currentTime = new Date();
     if (start >= end){
         alert("Start time cannot be after or equal to end time!");
+        return false;
+    }
+    if (start < currentTime){
+        alert ("Start time cannot be in the past!");
         return false;
     }
     localStorage.clear();
