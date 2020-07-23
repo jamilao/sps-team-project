@@ -127,3 +127,15 @@ function displayEvent(){
         }
     }
 }
+
+// Check that start and end times are valid.
+function validateForm(){
+    var start = new Date(document.getElementsByName('start')[0].value);
+    var end = new Date(document.getElementsByName('end')[0].value);
+    if (start >= end){
+        alert("Start time cannot be after or equal to end time!");
+        return false;
+    }
+    localStorage.clear();
+    return true;
+}
