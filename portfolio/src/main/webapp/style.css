@@ -1,3 +1,10 @@
+@font-face{
+    font-family: 'Scada', sans-serif;
+    font-family:'Titillium Web', sans-serif;
+}
+body{
+    font-family: 'Titillium Web', sans-serif;
+}
 #nav_bar {
     top: 0;
     background-color: black;
