@@ -120,6 +120,9 @@ function displayEvent(){
             var start = document.createElement("h2");
             start.innerText = "When: " + event.start;
             newDiv.append(start);
+            var description = document.createElement("h2");
+            description.innerText = "Description: " + event.description;
+            newDiv.append(description);
             container.append(newDiv);
             var passwordDiv = document.createElement("div");
             passwordDiv.innerHTML = "<input type='text' id='password' placeholder='Password'/><button type='button' onclick='checkPassword()'>Edit Event</button>";
