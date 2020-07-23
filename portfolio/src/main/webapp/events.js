@@ -51,8 +51,6 @@ function checkPassword(){
         if(this.readyState==4 && this.status==200){
             event = (Http.response)[0];
             var password = document.getElementById('password').value;
-            console.log(password);
-            console.log(event.password);
             if (password === event.password){
                 localStorage.setItem("eventName", event.eventName);
                 localStorage.setItem("location", event.location);
@@ -60,6 +58,8 @@ function checkPassword(){
                 localStorage.setItem("end", event.end);
                 localStorage.setItem("description", event.description);
                 localStorage.setItem("key", JSON.stringify(event.key));
+                localStorage.setItem("centerCoord", event.centerCoord);
+                localStorage.setItem("pathList", event.pathCoords);
                 document.getElementById('main').innerHTML='<object style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;" type="text/html" data="organizereventedit.html"></object>';
             }
             else{
