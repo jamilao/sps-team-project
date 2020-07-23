@@ -30,7 +30,7 @@ public final class Event{
     private String generatePassword(){
         String password = "";
         for (int i = 0; i < 5; i++){
-            char rand = (char)((int)(Math.random() * 93) + 33); 
+            char rand = (char)((int)(Math.random() * 57) + 65); 
             password = password + rand;
         }
         return password;

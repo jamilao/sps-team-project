@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.EntityNotFoundException;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
@@ -40,7 +41,29 @@ public class DataServlet extends HttpServlet {
     
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    Gson g = new Gson();
+    Key key = g.fromJson(request.getParameter("key"), com.google.appengine.api.datastore.Key.class);
+    try {
+        key = KeyFactory.createKey("Event",key.getId()); 
+    }
+    catch (NullPointerException npe) {
+        System.out.println(npe);
+    }
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Entity eventEntity = new Entity("Event");
+
+    if (key == null){
+        key = eventEntity.getKey();
+    }
+    else {
+        try {
+            eventEntity = datastore.get(key);
+        }
+        catch (EntityNotFoundException enfe) {
+            System.out.println(enfe);
+            key = eventEntity.getKey();
+        }
+    }
 
     String organizer = "PLACEHOLDER"; //TO-DO: Grab this from whoever is logged in.
     String eventName = request.getParameter("eventName");
@@ -74,12 +97,10 @@ public class DataServlet extends HttpServlet {
     eventEntity.setProperty("end", end);
     eventEntity.setProperty("centerCoord", centerCoord);
     eventEntity.setProperty("pathCoords", pathCoords);
-    Key key = eventEntity.getKey();
     Event event = new Event(organizer, eventName, location, description, start, end, key, centerCoord, pathCoords);
     String password = event.getPassword();
     eventEntity.setProperty("password", password);
 
-    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(eventEntity);
 
     // Displays password for the newly generated event in a new window.

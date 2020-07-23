@@ -5,26 +5,23 @@ var pathList = new Array();
 function grabPosition(userLat, userLng){
     position["lat"] = userLat;
     position["lng"] = userLng;
-    localStorage.setItem("userLat", position["lat"]);
-    localStorage.setItem("userLng", position["lng"]);
     var centerPos = {lat: userLat, lng: userLng};
     document.getElementById('centerCoord').value = JSON.stringify(centerPos);
 }
 
 //Sets latitude and longitude.
 function giveLatitude(){
-    setLat = parseFloat(localStorage.getItem("userLat"));
+    setLat = parseFloat((JSON.parse(localStorage.getItem("centerCoord"))).lat);
     return setLat;
 }
 function giveLongitude(){
-    setLng = parseFloat(localStorage.getItem("userLng"));
+    setLng = parseFloat((JSON.parse(localStorage.getItem("centerCoord"))).lng);
     return setLng;
 }
 
 function storeCoords(lat, lng){
     var position = {lat: lat, lng: lng}; 
     pathList.push(position);
-    localStorage.setItem("pathList", JSON.stringify(pathList));
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
 }
 
@@ -35,7 +32,6 @@ function removeCoord(lat, lng){
             pathList.splice(i, 1);
         }
     }
-    localStorage.setItem("pathList", JSON.stringify(pathList));
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
 }
 
