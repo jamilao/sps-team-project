@@ -79,6 +79,9 @@ function fillForm(){
     document.getElementsByName('start')[0].value=start;
     document.getElementsByName('end')[0].value=end;
     document.getElementsByName('description')[0].value=localStorage.getItem("description");
+    window.onbeforeunload = function() {
+        localStorage.clear();
+    }
 }
 
 function displayEvent(){

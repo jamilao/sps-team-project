@@ -43,7 +43,12 @@ public class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Gson g = new Gson();
     Key key = g.fromJson(request.getParameter("key"), com.google.appengine.api.datastore.Key.class);
-    key = KeyFactory.createKey("Event",key.getId()); 
+    try {
+        key = KeyFactory.createKey("Event",key.getId()); 
+    }
+    catch (NullPointerException npe) {
+        System.out.println(npe);
+    }
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Entity eventEntity = new Entity("Event");
 
