@@ -10,18 +10,13 @@
     <meta charset="utf-8">
   </head>
   <body style="margin:0px; background:#dfe0e2" onload="fillForm()">
-    <div class="header" style="padding:30px; background:black; color:#23b5d3">
-        <table>
-            <tr>
-                <td style="font-size:30px">Main</td>
-                <td width="50px"></td>
-                <td style="font-size:30px">Resources</td>
-                <td width="1100px"></td>
-                <td style="font-size:30px">Welcome</td>
-            </tr>
-        </table>
-    </div>
-    
+    <div id="header">
+        <section id="nav_bar" class="container">
+            <h4><a href="/events.html">Main</a></h4>
+            <h4><a href="/resources.html">Resources</a></h4>
+            <h4><a href="/organizereventedit.html">Create Event</a></h4>
+        </section>
+        </div>  
     <div>
         <form method="post" action="/data" target="_blank" onsubmit="return validateForm()">
         <table style="width:100%">
