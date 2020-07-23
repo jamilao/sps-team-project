@@ -59,6 +59,7 @@ function checkPassword(){
                 localStorage.setItem("start", event.start);
                 localStorage.setItem("end", event.end);
                 localStorage.setItem("description", event.description);
+                localStorage.setItem("key", JSON.stringify(event.key));
                 document.getElementById('main').innerHTML='<object style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;" type="text/html" data="organizereventedit.html"></object>';
             }
             else{
@@ -70,6 +71,7 @@ function checkPassword(){
 
 // TO-DO: Clear local storage after saving event. Saved event should replace existing datastore entry.
 function fillForm(){
+    document.getElementsByName('key')[0].value=localStorage.getItem("key");
     document.getElementsByName('eventName')[0].value=localStorage.getItem("eventName");
     document.getElementsByName('location')[0].value=localStorage.getItem("location");
     var start = new Date(localStorage.getItem("start")).toISOString().substring(0, 16);

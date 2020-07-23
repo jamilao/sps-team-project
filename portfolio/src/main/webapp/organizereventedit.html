@@ -23,7 +23,7 @@
     </div>
     
     <div>
-        <form method="post" action="/data" target="_blank">
+        <form method="post" action="/data" target="_blank" onsubmit="localStorage.clear();">
         <table style="width:100%">
             <tr>
                 <!--Height must be declared or map will not show up.-->
@@ -102,6 +102,7 @@
                             <!-- Currently the input type is "text" for testing, but can be changed to "hidden" to not see the field on the page.-->
                             <td><input type="hidden" name="centerCoord" id="centerCoord" value=""/>
                             <input type="hidden" name="pathCoords" id="pathCoords" value=""/></td>
+                            <input type="text" name="key" id="key" value=""/></td>
                         </tr>
                         <tr>
                             <td colspan="2" height="25px"></td>
