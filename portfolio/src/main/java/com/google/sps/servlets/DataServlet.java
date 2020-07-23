@@ -37,7 +37,7 @@ import java.text.ParseException;
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
-    ArrayList<Event> events = new ArrayList<>();
+    
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Entity eventEntity = new Entity("Event");
@@ -88,6 +88,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    ArrayList<Event> events = new ArrayList<>();
     Query query = new Query("Event");
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
