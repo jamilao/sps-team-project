@@ -6,6 +6,9 @@
         <link rel="stylesheet" href="events.css">
         <link href="https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap" rel="stylesheet"> 
         <script src="events.js"></script>
+        <script src="map.js"></script>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+        <meta charset="utf-8">
     </head>
     <body onload="displayEvent()">
         <div id="header">
@@ -15,6 +18,35 @@
             <h4><a href="/resources.html">Resources</a></h4>
             <h4><a href="/organizereventedit.html">Create Event</a></h4>
         </section>
+        </div>
+        <!--Height must be declared or map will not show up.-->
+        <div style="height:300px; width:100%;" id="map">
+            <table style="height:300px; width:100%;"> 
+                <script>
+                    var map, infoWindow;
+
+                    function initMap() {
+                        map = new google.maps.Map(document.getElementById('map'), {
+                        center: giveCenterUser(),
+                        zoom: 14
+                        });
+                        infoWindow = new google.maps.InfoWindow;
+
+                        // Draws polyline. Base code from: https://developers.google.com/maps/documentation/javascript/shapes
+                        var path = new google.maps.Polyline({
+                            path: givePathUser(),
+                            geodesic: true,
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: 2
+                        });
+                        path.setMap(map);
+                    }
+                </script>
+                <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ00Z_l0PN-jiIyiUHTjn_jdnlY8HNn34&callback=initMap">
+                </script>
+            </table>
         </div>  
         <div id="main">
         </div>
