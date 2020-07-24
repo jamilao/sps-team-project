@@ -55,3 +55,15 @@ function givePath(map){
     }
     return path;
 }
+
+function givePathUser(){
+    var path = JSON.parse(localStorage.getItem("pathList"));
+    pathlist = path;
+    return path;
+}
+
+function giveCenterUser(){
+    var center = JSON.parse(localStorage.getItem("centerCoord"));
+    position = center;
+    return center;
+}

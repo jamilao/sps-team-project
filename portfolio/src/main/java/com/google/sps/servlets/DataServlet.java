@@ -65,8 +65,8 @@ public class DataServlet extends HttpServlet {
         }
     }
 
-    String organizer = "PLACEHOLDER"; //TO-DO: Grab this from whoever is logged in.
     String eventName = request.getParameter("eventName");
+    String organizer = request.getParameter("organizer");
     String location = request.getParameter("location");
     String description = request.getParameter("description");
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
@@ -92,8 +92,8 @@ public class DataServlet extends HttpServlet {
     String phone = request.getParameter("phone");
     String email = request.getParameter("email");
 
-    eventEntity.setProperty("organizer", organizer);
     eventEntity.setProperty("eventName", eventName);
+    eventEntity.setProperty("organizer", organizer);
     eventEntity.setProperty("location", location);
     eventEntity.setProperty("description", description);
     eventEntity.setProperty("start", start);
@@ -120,8 +120,8 @@ public class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
         for (Entity entity : results.asIterable()){
-            String organizer = (String) entity.getProperty("organizer");
             String eventName = (String) entity.getProperty("eventName");
+            String organizer = (String) entity.getProperty("organizer");
             String location = (String) entity.getProperty("location");
             String description = (String) entity.getProperty("description");
             Date start = (Date) entity.getProperty("start");
