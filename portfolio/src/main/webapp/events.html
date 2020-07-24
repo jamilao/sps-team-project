@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="events.css">
         <script src="events.js"></script>
     </head>
-    <body onload="fetchEvents()">
+    <body onload="fetchEvents();getLastSelectedValue()">
         <div id="header">
         <section id="nav_bar" class="container">
             <h4><a href="/events.html">Main</a></h4>
@@ -18,10 +18,17 @@
         <div id="protest_menu">
         <h2>Join a protest in:</h2>
         <div class="dropdown">
-            <button class="dropbtn">Choose a city</button>
+            <select name="cities" id="cities" onchange = "getSelectValue('cities');">
+            <option style="color:black;"value="All" selected>All</option>
+            <option style="color:black;"value="New York">New York</option>
+            <option style="color:black;"value="New Jersey">New Jersey</option>
+            <option style="color:black;"value="Brooklyn">Brooklyn</option>
+            </select>
+           <!-- <button class="dropbtn">Choose a city</button>
             <div class="dropdown-content">
             <a href='#'>All</a>
-            </div>
+            <a href="1">New York</a>
+            </div>-->
         </div>
         </div>
         <div id="main">
@@ -33,3 +40,34 @@
         </div>
     </body>
 </html>
+<script type="text/javascript">
+/*
+var select = document.getElementById("cities"); 
+var options = new Array();
+events.forEach((event)=> {
+    options.push(event.location);
+        });
+
+for(var i = 0; i < options.length; i++) {
+    var opt = options[i];
+
+    var el = document.createElement("option");
+    el.text = opt;
+    el.value = opt;
+
+    select.add(el);
+}​*/
+
+function getSelectValue(selectID){
+         pick_ = document.getElementById('cities').value;
+         localStorage.setItem("lastSelectedValue", pick_); 
+         location.reload(); 
+}
+function getLastSelectedValue(){
+         var value = localStorage.getItem("lastSelectedValue")
+         if(value )
+         {
+            document.getElementById('cities').value = value  ;
+         }
+}
+</script>
