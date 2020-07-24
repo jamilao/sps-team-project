@@ -1,0 +1,40 @@
+@font-face{
+    font-family: 'Scada', sans-serif;
+    font-family:'Titillium Web', sans-serif;
+}
+body{
+    font-family: 'Titillium Web', sans-serif;
+}
+#nav_bar {
+    top: 0;
+    background-color: black;
+    padding-bottom: 0;
+    padding-top: 15px;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: baseline;
+}
+h4 {
+    font-size: 20px;
+    padding-left: 0;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    font-weight:400;
+}
+a {
+    color: #23b5d3;
+}
+a.internal {
+    text-decoration: none;
+}
+a:visited  {
+    color: #23b5d3;
+}
+a:hover{
+    color: white;
+}
