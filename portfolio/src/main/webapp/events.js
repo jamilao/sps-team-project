@@ -60,6 +60,9 @@ function checkPassword(){
                 localStorage.setItem("key", JSON.stringify(event.key));
                 localStorage.setItem("centerCoord", event.centerCoord);
                 localStorage.setItem("pathList", event.pathCoords);
+                localStorage.setItem("hashtag", event.hashtag);
+                localStorage.setItem("phone", event.phone);
+                localStorage.setItem("email", event.email);
                 document.getElementById('main').innerHTML='<object style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%;" type="text/html" data="organizereventedit.html"></object>';
             }
             else{
@@ -79,6 +82,10 @@ function fillForm(){
     document.getElementsByName('start')[0].value=start;
     document.getElementsByName('end')[0].value=end;
     document.getElementsByName('description')[0].value=localStorage.getItem("description");
+    document.getElementById('centerCoord').value = (localStorage.getItem("centerCoord"));
+    document.getElementsByName('hashtag')[0].value=localStorage.getItem("hashtag");
+    document.getElementsByName('phone')[0].value=localStorage.getItem("phone");
+    document.getElementsByName('email')[0].value=localStorage.getItem("email");
     window.onbeforeunload = function() {
         localStorage.clear();
     }
@@ -130,7 +137,7 @@ function displayEvent(){
     }
 }
 
-// Check that start and end times are valid.
+// Check that start and end times are valid, and that mandatory fields are not empty.
 function validateForm(){
     var start = new Date(document.getElementsByName('start')[0].value);
     var end = new Date(document.getElementsByName('end')[0].value);
@@ -141,6 +148,10 @@ function validateForm(){
     }
     if (start < currentTime){
         alert ("Start time cannot be in the past!");
+        return false;
+    }
+    if (document.getElementsByName('eventName')[0].value === "" || document.getElementsByName('location')[0].value === "" || document.getElementsByName('start')[0].value === "" || document.getElementsByName('end')[0].value === "" || document.getElementsByName('description')[0].value === ""){
+        alert ("Please fill out mandatory fields!");
         return false;
     }
     localStorage.clear();

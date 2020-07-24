@@ -88,6 +88,9 @@ public class DataServlet extends HttpServlet {
     }
     String centerCoord = request.getParameter("centerCoord");
     String pathCoords = request.getParameter("pathCoords");
+    String hashtag = request.getParameter("hashtag");
+    String phone = request.getParameter("phone");
+    String email = request.getParameter("email");
 
     eventEntity.setProperty("organizer", organizer);
     eventEntity.setProperty("eventName", eventName);
@@ -97,7 +100,10 @@ public class DataServlet extends HttpServlet {
     eventEntity.setProperty("end", end);
     eventEntity.setProperty("centerCoord", centerCoord);
     eventEntity.setProperty("pathCoords", pathCoords);
-    Event event = new Event(organizer, eventName, location, description, start, end, key, centerCoord, pathCoords);
+    eventEntity.setProperty("hashtag", hashtag);
+    eventEntity.setProperty("phone", phone);
+    eventEntity.setProperty("email", email);
+    Event event = new Event(organizer, eventName, location, description, start, end, key, centerCoord, pathCoords, hashtag, phone, email);
     String password = event.getPassword();
     eventEntity.setProperty("password", password);
 
@@ -123,7 +129,10 @@ public class DataServlet extends HttpServlet {
             Key key = entity.getKey();
             String centerCoord = (String) entity.getProperty("centerCoord");
             String pathCoords = (String) entity.getProperty("pathCoords");
-            Event event = new Event(organizer,eventName,location,description,start,end,key, centerCoord, pathCoords);
+            String hashtag = (String) entity.getProperty("hashtag");
+            String phone = (String) entity.getProperty("phone");
+            String email = (String) entity.getProperty("email");
+            Event event = new Event(organizer,eventName,location,description,start,end,key, centerCoord, pathCoords, hashtag, phone, email);
             event.setPassword((String) entity.getProperty("password"));
             events.add(event);
         }

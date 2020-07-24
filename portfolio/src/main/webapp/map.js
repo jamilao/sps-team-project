@@ -35,7 +35,23 @@ function removeCoord(lat, lng){
     document.getElementById('pathCoords').value = JSON.stringify(pathList);
 }
 
-function givePath(){
+function givePath(map){
     var path = JSON.parse(localStorage.getItem("pathList"));
+    pathlist = path;
+    document.getElementById('pathCoords').value = JSON.stringify(pathList);
+    var markers = new Array(path.length);
+    for (let i = 0; i<path.length; i++){
+        markers[i] = new google.maps.Marker({
+            position: path[i],
+            map: map,
+            draggable: false
+        });
+        markers[i].addListener('click', function(f){
+            removeCoord(markers[i].position.lat(), markers[i].position.lng());
+            markers[i].setMap(null);
+        });
+        markers[i].setMap(map);
+        storeCoords(markers[i].position.lat(), markers[i].position.lng());
+    }
     return path;
 }

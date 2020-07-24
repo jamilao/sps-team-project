@@ -76,7 +76,7 @@
                                 // Draws polyline from hard-coded coordinates. Base code from: https://developers.google.com/maps/documentation/javascript/shapes
                                 else{
                                     var path = new google.maps.Polyline({
-                                        path: givePath(),
+                                        path: givePath(map),
                                         geodesic: true,
                                         strokeColor: '#FF0000',
                                         strokeOpacity: 1.0,
@@ -94,7 +94,7 @@
                                     });
 
                                     //Click on marker to remove it in case of mis-clicks.
-                                    marker.addListener('click', function(f){
+                                    marker.addListener("click", function(f){
                                         removeCoord(marker.position.lat(), marker.position.lng());
                                         marker.setMap(null);
                                     });

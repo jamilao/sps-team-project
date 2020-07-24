@@ -13,8 +13,11 @@ public final class Event{
     private final Key key;
     private String centerCoord;
     private String pathCoords;
+    private String hashtag;
+    private String phone;
+    private String email;
 
-    public Event(String organizer, String eventName, String location, String description, Date start, Date end, Key key, String centerCoord, String pathCoords){
+    public Event(String organizer, String eventName, String location, String description, Date start, Date end, Key key, String centerCoord, String pathCoords, String hashtag, String phone, String email){
         this.organizer = organizer;
         this.eventName = eventName;
         this.location = location;
@@ -25,6 +28,9 @@ public final class Event{
         this.key = key;
         this.centerCoord = centerCoord;
         this.pathCoords = pathCoords;
+        this.hashtag = hashtag;
+        this.phone = phone;
+        this.email = email;
     }
 
     private String generatePassword(){
@@ -34,10 +40,6 @@ public final class Event{
             password = password + rand;
         }
         return password;
-    }
-
-    public boolean validatePassword(String input){
-        return (input.equals(this.password));
     }
 
     public String getPassword(){
