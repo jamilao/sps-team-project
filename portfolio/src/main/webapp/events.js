@@ -131,6 +131,8 @@ function displayEvent(){
             newDiv.append(start);
             container.append(newDiv);
             var passwordDiv = document.createElement("div");
+            localStorage.setItem("centerCoord", event.centerCoord);
+            localStorage.setItem("pathList", event.pathCoords);
             passwordDiv.innerHTML = "<input type='text' id='password' placeholder='Password'/><button type='button' onclick='checkPassword()'>Edit Event</button>";
             newDiv.innerHTML += "<br><br><br>";
             newDiv.append(passwordDiv);

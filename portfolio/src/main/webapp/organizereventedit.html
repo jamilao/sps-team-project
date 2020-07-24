@@ -28,7 +28,6 @@
                             <script>
                             var map, infoWindow;
 
-
                             var newMap = 1; //Track if organizer is editing an old map or making a new map. 1 = old map.
                             try {
                                 var setLat = giveLatitude();
@@ -73,7 +72,7 @@
                                     }
                                 }
 
-                                // Draws polyline from hard-coded coordinates. Base code from: https://developers.google.com/maps/documentation/javascript/shapes
+                                // Draws polyline. Base code from: https://developers.google.com/maps/documentation/javascript/shapes
                                 else{
                                     var path = new google.maps.Polyline({
                                         path: givePath(map),
