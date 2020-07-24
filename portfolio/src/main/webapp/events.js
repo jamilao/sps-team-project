@@ -136,7 +136,7 @@ function displayEvent(){
     }
 }
 
-// Check that start and end times are valid.
+// Check that start and end times are valid, and that mandatory fields are not empty.
 function validateForm(){
     var start = new Date(document.getElementsByName('start')[0].value);
     var end = new Date(document.getElementsByName('end')[0].value);
@@ -147,6 +147,10 @@ function validateForm(){
     }
     if (start < currentTime){
         alert ("Start time cannot be in the past!");
+        return false;
+    }
+    if (document.getElementsByName('eventName')[0].value === "" || document.getElementsByName('location')[0].value === "" || document.getElementsByName('start')[0].value === "" || document.getElementsByName('end')[0].value === "" || document.getElementsByName('description')[0].value === ""){
+        alert ("Please fill out mandatory fields!");
         return false;
     }
     localStorage.clear();
