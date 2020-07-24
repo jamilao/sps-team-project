@@ -82,6 +82,7 @@ function fillForm(){
     document.getElementsByName('start')[0].value=start;
     document.getElementsByName('end')[0].value=end;
     document.getElementsByName('description')[0].value=localStorage.getItem("description");
+    document.getElementById('centerCoord').value = (localStorage.getItem("centerCoord"));
     document.getElementsByName('hashtag')[0].value=localStorage.getItem("hashtag");
     document.getElementsByName('phone')[0].value=localStorage.getItem("phone");
     document.getElementsByName('email')[0].value=localStorage.getItem("email");
