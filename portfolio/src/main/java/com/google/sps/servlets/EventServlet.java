@@ -42,8 +42,8 @@ public class EventServlet extends HttpServlet {
     try {
         Entity entity = datastore.get(eventKey);
         
-        String organizer = (String) entity.getProperty("organizer");
         String eventName = (String) entity.getProperty("eventName");
+        String organizer = (String) entity.getProperty("organizer");
         String location = (String) entity.getProperty("location");
         String description = (String) entity.getProperty("description");
         Date start = (Date) entity.getProperty("start");

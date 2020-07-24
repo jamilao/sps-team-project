@@ -53,6 +53,7 @@ function checkPassword(){
             var password = document.getElementById('password').value;
             if (password === event.password){
                 localStorage.setItem("eventName", event.eventName);
+                localStorage.setItem("organizer", event.organizer);
                 localStorage.setItem("location", event.location);
                 localStorage.setItem("start", event.start);
                 localStorage.setItem("end", event.end);
@@ -76,6 +77,7 @@ function checkPassword(){
 function fillForm(){
     document.getElementsByName('key')[0].value=localStorage.getItem("key");
     document.getElementsByName('eventName')[0].value=localStorage.getItem("eventName");
+    document.getElementsByName('organizer')[0].value=localStorage.getItem("organizer");
     document.getElementsByName('location')[0].value=localStorage.getItem("location");
     var start = new Date(localStorage.getItem("start")).toISOString().substring(0, 16);
     var end = new Date(localStorage.getItem("end")).toISOString().substring(0, 16);
@@ -150,7 +152,7 @@ function validateForm(){
         alert ("Start time cannot be in the past!");
         return false;
     }
-    if (document.getElementsByName('eventName')[0].value === "" || document.getElementsByName('location')[0].value === "" || document.getElementsByName('start')[0].value === "" || document.getElementsByName('end')[0].value === "" || document.getElementsByName('description')[0].value === ""){
+    if (document.getElementsByName('eventName')[0].value === "" || document.getElementsByName('organizer')[0].value === "" || document.getElementsByName('location')[0].value === "" || document.getElementsByName('start')[0].value === "" || document.getElementsByName('end')[0].value === "" || document.getElementsByName('description')[0].value === ""){
         alert ("Please fill out mandatory fields!");
         return false;
     }

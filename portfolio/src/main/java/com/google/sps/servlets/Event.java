@@ -59,36 +59,4 @@ public final class Event{
     public void setPathCoords(String pathCoords){
         this.pathCoords = pathCoords;
     }
-
-    public String getOrganizer(){
-       return organizer;
-    }
-    
-    public String getEventName(){
-       return eventName;
-    }
-    
-    public String getLocation(){
-       return location;
-    }
-    
-    public String getDescription(){
-       return description;
-    }
-    
-    public Date getStart(){
-        return start;
-    }
-
-    public Date getEnd(){
-        return end;
-    }
-
-    public String getCenterCoord(){
-        return centerCoord;
-    }
-
-    public String getPathCoords(){
-        return pathCoords;
-    }
 }
