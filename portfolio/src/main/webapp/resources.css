@@ -87,6 +87,15 @@ h40 {
     padding-bottom: 20px;
     padding-top: 20px;
 }
+
+h41 {
+    font-size: 40px;
+    padding-left: 0;
+    padding-right: 720px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    color: #23b5d3;
+}
 a {
     color: #23b5d3;
 }
